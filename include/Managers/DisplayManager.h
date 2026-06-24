@@ -12,6 +12,7 @@ protected:
     int16_t SCREEN_WIDTH;
     int16_t SCREEN_HEIGHT;
     int SCREEN_STRIP;
+    int BACKLIGHT;
 
 public:
     static DisplayManager* getInstance();
@@ -21,6 +22,7 @@ public:
     virtual void flushCanvas(GFXcanvas16 *canvas, int16_t stripOffset) = 0;
     virtual bool isPointInside(int16_t x, int16_t y) = 0;
 
+    void setBacklight(bool on);
     int16_t getWidth();
     int16_t getHeight();
     int getStrip();

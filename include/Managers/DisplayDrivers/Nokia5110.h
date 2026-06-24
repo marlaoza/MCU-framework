@@ -6,8 +6,9 @@ private:
     Adafruit_PCD8544* _lcd;
 
 public:
-    Nokia5110Manager(int sclk, int din, int dc, int cs, int rst) {
+    Nokia5110Manager(int sclk, int din, int dc, int cs, int rst, int bl) {
         _lcd = new Adafruit_PCD8544(sclk, din, dc, cs, rst);
+        BACKLIGHT = bl;
         SCREEN_WIDTH = 84;
         SCREEN_HEIGHT = 48;
         SCREEN_STRIP = 1;
@@ -20,6 +21,10 @@ public:
     bool begin() override {
         _lcd->begin();
         _lcd->setContrast(57);
+
+        pinMode(BACKLIGHT, OUTPUT);
+        digitalWrite(BACKLIGHT, HIGH);
+        
         clear();
         return true;
     }
@@ -33,7 +38,7 @@ public:
             for (int16_t x = 0; x < SCREEN_WIDTH; x++) {
                 uint16_t color = canvas->getPixel(x, y); 
                 
-                uint16_t monoColor = (color != 0) ? BLACK : WHITE; 
+                uint16_t monoColor = (color != 0) ? 1 : 0; 
                 
                 _lcd->drawPixel(x, stripOffset + y, monoColor);
             }

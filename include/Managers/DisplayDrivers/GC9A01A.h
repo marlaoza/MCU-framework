@@ -6,13 +6,11 @@ private:
     Adafruit_GC9A01A* _tft;
     const int16_t SCREEN_CENTER = 120;
     const int16_t SCREEN_RADIUS = 120;
-    int backLight;
    
 public:
     GC9A01AManager(int cs, int dc, int rst, int bl) {
         _tft = new Adafruit_GC9A01A(cs, dc, rst);
-        this->backLight = bl;
-
+        BACKLIGHT = bl;
         SCREEN_WIDTH = 240;
         SCREEN_HEIGHT = 240;
         SCREEN_STRIP = 30;
@@ -22,8 +20,8 @@ public:
         _tft->begin();
         _tft->setRotation(0);
 
-        pinMode(backLight, OUTPUT);
-        digitalWrite(backLight, HIGH);
+        pinMode(BACKLIGHT, OUTPUT);
+        digitalWrite(BACKLIGHT, HIGH);
 
         clear();
         return true;
