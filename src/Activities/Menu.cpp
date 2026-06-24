@@ -10,13 +10,13 @@ void Menu::setup() {
     UIElement* screen1 = new UIElement("screen", {.x = 0, .y = 0, .width = _display->getWidth(), .height = _display->getHeight(), .color = GC9A01A_BLACK, .z = 0});
     this->screens["screen"] = screen1;
     
-    UIElement* box1 = new UIElement("box1", {.x = 70, .y = 100, .width = 50, .height = 50, .color=GC9A01A_CYAN});
-    UIElement* box2 = new UIElement("box2", {.x = 140, .y = 100, .width = 50, .height = 50, .color=GC9A01A_CYAN});
+    UIElement* box1 = new UIElement("box1", {.x = 70,  .y = 100, .width = 50, .height = 50, .borderColor=GC9A01A_RED, .borderSize = 3, .color=GC9A01A_CYAN});
+    UIElement* box2 = new UIElement("box2", {.x = 140, .y = 100, .width = 50, .height = 50, .borderColor=GC9A01A_RED, .borderSize = 1, .color=GC9A01A_CYAN});
     
     UIAnimation test = {
         .steps = {
             {.x = 70, .y = 100, .color = GC9A01A_CYAN}, 
-            {.x = 65, .y = 105, .color = GC9A01A_RED},
+            {.x = 65, .y = 150, .color = GC9A01A_RED},
             {.x = 70, .y = 100, .color = GC9A01A_CYAN},
             },
         .interpolation = InterpolationType::Linear,

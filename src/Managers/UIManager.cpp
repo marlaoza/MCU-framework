@@ -1,8 +1,8 @@
 #include "Managers/DisplayManager.h"
 #include "Managers/UIManager.h"
+#include "Managers/InputManager.h"
 #include <vector>
 #include <Utils.h>
-#include <Managers/InputManager.h>
 
 UIManager* UIManager::_instance = nullptr;
 

@@ -20,6 +20,8 @@ struct UIStyle {
     std::optional<int16_t> width;
     std::optional<int16_t> height;
     std::optional<int8_t> borderRadius;
+    std::optional<uint16_t> borderColor;
+    std::optional<int8_t> borderSize;
     std::optional<uint16_t> color;
     std::optional<Sprite*> sprite;
     std::optional<int16_t> z;
@@ -48,6 +50,8 @@ inline UIStyle overwriteStyle(UIStyle base, UIStyle patch) {
     if (patch.width) base.width = patch.width;
     if (patch.height) base.height = patch.height;
     if (patch.borderRadius) base.borderRadius = patch.borderRadius;
+    if (patch.borderColor) base.borderColor = patch.borderColor;
+    if (patch.borderSize) base.borderSize = patch.borderSize;
     if (patch.color) base.color = patch.color;
     if (patch.sprite) base.sprite = patch.sprite;
     if (patch.z) base.z = patch.z;

@@ -164,6 +164,8 @@ UIStyle UIElement::getStyle(){
     if (!retStyle.width) retStyle.width = 0;
     if (!retStyle.height) retStyle.height = 0;
     if (!retStyle.borderRadius) retStyle.borderRadius = 0;
+    if (!retStyle.borderSize) retStyle.borderSize = 0;
+    if (!retStyle.borderColor) retStyle.borderColor = GC9A01A_BLACK;
     if (!retStyle.color) retStyle.color = GC9A01A_BLACK;
     if (!retStyle.z) retStyle.z = 1;
     if (!retStyle.offsetY) retStyle.offsetY = 0;
@@ -232,10 +234,13 @@ void UIElement::runAnimation(){
     if (end.textSize) retStyle.textSize = start.textSize ? interpolate(start.textSize.value(), end.textSize.value(), deltaInterpolation, this->animation->interpolation) : end.textSize.value();
     if (end.x) retStyle.x = start.x ? interpolate(start.x.value(), end.x.value(), deltaInterpolation, this->animation->interpolation) : end.x.value();
     if (end.y) retStyle.y = start.y ? interpolate(start.y.value(), end.y.value(), deltaInterpolation, this->animation->interpolation) : end.y.value();
-
+    
+    if (end.borderSize) retStyle.borderSize = start.borderSize ? interpolate(start.borderSize.value(), end.borderSize.value(), deltaInterpolation, this->animation->interpolation) : end.borderSize.value();
+    
     if (end.color) retStyle.color = start.color ? interpolateColor(start.color.value(), end.color.value(), deltaInterpolation, this->animation->interpolation) : end.color.value();
     if (end.textColor) retStyle.textColor = start.textColor ? interpolateColor(start.textColor.value(), end.textColor.value(), deltaInterpolation, this->animation->interpolation) : end.textColor.value();
-    
+    if (end.borderColor) retStyle.borderColor = start.borderColor ? interpolateColor(start.borderColor.value(), end.borderColor.value(), deltaInterpolation, this->animation->interpolation) : end.borderColor.value();
+
     if (end.sprite) retStyle.sprite = end.sprite;
     if (end.z) retStyle.z = end.z;
     if (end.textAlign) retStyle.textAlign = end.textAlign;
@@ -258,7 +263,13 @@ void UIElement::render(Adafruit_GFX* tft, int stripOffset){
         renderX += parentS.x.value_or(0) + parentS.offsetX.value_or(0) + parentS.paddingX.value_or(0);
         renderY += parentS.y.value_or(0) + parentS.offsetY.value_or(0) + parentS.paddingY.value_or(0);
     }
+   
     tft->fillRoundRect(renderX, renderY, s.width.value_or(0), s.height.value_or(0), s.borderRadius.value_or(0), s.color.value_or(GC9A01A_BLACK));
+    if(s.borderSize.value() > 0){
+        for(int i = 0; i < s.borderSize.value(); i++){
+            tft->drawRoundRect(renderX + i, renderY + i, s.width.value_or(0) - 2*i, s.height.value_or(0) - 2*i, s.borderRadius.value_or(0), s.borderColor.value_or(GC9A01A_BLACK));
+        }
+    }
     // if(s.sprite && s.sprite.value() != nullptr){
     //     if(s.sprite.value()->mask != nullptr){tft->drawRGBBitmap(renderX, renderY, s.sprite.value()->sprite, s.sprite.value()->mask, s.width.value_or(0), s.height.value_or(0));}
     //     else{tft->drawRGBBitmap(renderX, renderY, s.sprite.value()->sprite, s.width.value_or(0), s.height.value_or(0));}

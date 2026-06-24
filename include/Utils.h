@@ -58,7 +58,7 @@ enum InterpolationType {
 
 template <typename T>
 inline T interpolate(T start, T end, float t, InterpolationType type) {
-    if(type == InterpolationType::Snap){return end;}
+    if(type == Snap){return end;}
     if(type == EaseIn){t*=t;}
     if(type == EaseOut){t*=((float)2 - t);}
     return start + (T)((float)(end - start) * t);
