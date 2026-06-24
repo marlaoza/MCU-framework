@@ -14,14 +14,16 @@ protected:
     int SCREEN_STRIP;
     int BACKLIGHT;
 
+    bool isRound;
+
 public:
     static DisplayManager* getInstance();
 
     virtual bool begin() = 0;
     virtual void clear() = 0;
     virtual void flushCanvas(GFXcanvas16 *canvas, int16_t stripOffset) = 0;
-    virtual bool isPointInside(int16_t x, int16_t y) = 0;
 
+    bool isPointInside(int16_t x, int16_t y);
     void setBacklight(bool on);
     int16_t getWidth();
     int16_t getHeight();

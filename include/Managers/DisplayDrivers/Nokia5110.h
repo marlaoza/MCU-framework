@@ -46,8 +46,5 @@ public:
         _lcd->display();
     }
 
-    bool isPointInside(int16_t x, int16_t y) override {
-        return (x >= 0 && x < SCREEN_WIDTH && y >= 0 && y < SCREEN_HEIGHT);
-    }
 
 };
