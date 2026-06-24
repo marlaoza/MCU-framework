@@ -7,7 +7,7 @@ Menu::Menu()
     : Activity("menu", nullptr) {}
 void Menu::setup() {
 
-    UIElement* screen1 = new UIElement("screen", {.x = 0, .y = 0, .width = SCREEN_WIDTH, .height = SCREEN_HEIGHT, .color = GC9A01A_BLACK, .z = 0});
+    UIElement* screen1 = new UIElement("screen", {.x = 0, .y = 0, .width = _display->getWidth(), .height = _display->getHeight(), .color = GC9A01A_BLACK, .z = 0});
     this->screens["screen"] = screen1;
     
     UIElement* box1 = new UIElement("box1", {.x = 70, .y = 100, .width = 50, .height = 50, .color=GC9A01A_CYAN});

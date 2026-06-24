@@ -3,6 +3,8 @@
 
 #include <Arduino.h>
 
+#define USE_GC9A01A
+
 // --- DISPLAY SETTINGS (GC9A01) ---
 #define TFT_RES      4
 #define TFT_CS       5
@@ -10,11 +12,6 @@
 #define TFT_MOSI     23
 #define TFT_SCLK     18
 #define TFT_BL       22
-
-#define SCREEN_WIDTH  240
-#define SCREEN_HEIGHT 240
-#define SCREEN_RADIUS 120
-#define SCREEN_CENTER 120
 
 // --- BUTTONS ---
 #define BTN_26      26    

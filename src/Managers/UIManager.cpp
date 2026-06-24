@@ -6,12 +6,11 @@
 
 UIManager* UIManager::_instance = nullptr;
 
-#define SCREEN_STRIP 30
 UIManager::UIManager() {
     this->curScreen = nullptr;
     this->dirty = true;
    
-    this->canvas = new GFXcanvas16(SCREEN_WIDTH, SCREEN_STRIP);
+    this->canvas = new GFXcanvas16(DisplayManager::getInstance()->getWidth(), DisplayManager::getInstance()->getStrip());
 }
 UIManager::~UIManager() {
 }
@@ -53,16 +52,17 @@ void UIManager::update(){
 
 void UIManager::render(){
     if(this->dirty && this->curScreen != nullptr){
-        Adafruit_GC9A01A* _tft = DisplayManager::getInstance()->getTFT();
-        for(int stripOffset = 0; stripOffset < SCREEN_HEIGHT; stripOffset += SCREEN_STRIP){
+        // Adafruit_GC9A01A* _tft = DisplayManager::getInstance()->getTFT();
+        for(int stripOffset = 0; stripOffset < DisplayManager::getInstance()->getWidth(); stripOffset += DisplayManager::getInstance()->getStrip()){
             if(this->curScreen){ 
                 UIStyle style = this->curScreen->getStyle();
-                canvas->fillScreen(style.color.value_or(GC9A01A_BLACK));
+                canvas->fillScreen(style.color.value_or(0));
                 // if(style.sprite != nullptr && style.sprite.value()->sprite != nullptr){
                 //     canvas->drawRGBBitmap(0, 0, style.sprite.value()->sprite + (stripOffset * SCREEN_WIDTH), SCREEN_WIDTH, SCREEN_STRIP);}
                 this->curScreen->render(canvas, stripOffset); 
             }
-           _tft->drawRGBBitmap(0, stripOffset, canvas->getBuffer(), SCREEN_WIDTH, SCREEN_STRIP);
+            DisplayManager::getInstance()->flushCanvas(canvas, stripOffset);
+        //    _tft->drawRGBBitmap(0, stripOffset, canvas->getBuffer(), DisplayManager::getInstance()->getWidth(), SCREEN_STRIP);
 
         }    
         this->dirty = false;

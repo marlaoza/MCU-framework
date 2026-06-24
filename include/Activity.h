@@ -11,7 +11,6 @@ class Activity {
     protected:
         DisplayManager* _display =  DisplayManager::getInstance();
         ActivityManager* _activityManager = nullptr;
-        Adafruit_GC9A01A* _tft = DisplayManager::getInstance()->getTFT();
         UIManager* _screen = UIManager::getInstance();
         InputManager* _input = InputManager::getInstance();
         std::map<std::string, UIElement*> screens;
